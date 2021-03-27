@@ -1,0 +1,35 @@
+@model Product
+
+
+<div class="card text-center mb-2" style="width: 18rem;">
+    <a asp-controller="shop" asp-action="Details" asp-route-url="@Model.Url" class="stretched-link"><img class="card-img-top img-fluid mt-2" src="~/images/@Model.ImageUrl" alt="Ürün Fotoğrafı"></a>
+    <div class="card-body">
+        <p class="card-text">@Model.Name</p>
+        <h3 class="card-title">@Model.Price TL</h3>
+    </div>
+</div>
+
+<!--
+<div class="card mb-2">
+    <a asp-controller="shop" asp-action="Details" asp-route-url="@Model.Url" class="stretched-link"><img class="card-img-top img-fluid mt-2" src="~/images/@Model.ImageUrl" alt=""></a>
+    <div class="card-body">
+        <p class="card-text">@Model.Name</p>
+        <h3 class="card-title">@Model.Price TL</h3>
+    </div>
+    <!--
+    <div class="card-footer text-center">
+        <a asp-controller="shop" asp-action="Details" asp-route-url="@Model.Url" class="btn btn-primary btn-sm">Detaylar</a>
+
+        @if(User.Identity.IsAuthenticated)
+        {
+            <form asp-controller="Cart" asp-action="AddToCart" method="POST" style="display: inline;">
+                <input type="hidden" name="productId" value="@Model.ProductId">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn btn-primary btn-sm">Sepete Ekle</button>
+            </form>
+        }
+    </div>
+    
+</div>   
+
+-->

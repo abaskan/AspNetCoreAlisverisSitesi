@@ -1,0 +1,57 @@
+@model AddressListViewModel
+
+
+<div class="row">
+    <div class="col-md-3">
+        @await Html.PartialAsync("_settingList")  
+    </div>
+    <div class="col-md-9">
+
+      
+        <div class="card mb-5 ml-3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+            <h5 class="card-title">Adreslerim</h5>
+            <a class="btn btn-outline-success" href="/account/AddressCreate">Yeni Adres Oluştur</a>
+          </div>
+          </div>
+        
+
+      </div>
+
+      @foreach (var item in Model.Addresses)
+      {
+        <div class="col-md-4">
+          <div class="card mb-3 h-100">
+            <div class="card-header">
+              
+                @item.AddressTitle
+              
+            </div>
+            <div class="card-body">
+              <p class="card-text">@item.FirstName @item.LastName</p>
+              <p class="card-text">@item.Neighborhood @item.AddressBody</p>
+              <p class="card-text">@item.City / @item.District</p>
+              <p class="card-text">@item.Phone</p>
+              <div class="d-flex justify-content-between mt-3">
+              
+                <form action="/Account/AddressDelete" method="post">
+                    <input type="hidden" name="addressId" value="@item.AddressId">
+                    <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                </form>
+
+                <a class="btn btn-outline-primary btn-sm" href="/account/AddressEdit/@item.AddressId">Düzenle</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+    </div>
+</div>
+
+
+
+
+
+

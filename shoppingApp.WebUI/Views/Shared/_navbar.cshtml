@@ -1,0 +1,145 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">E-Alışveriş</a>
+   
+   <form action="/search" class="form-inline my-2 ml-auto my-lg-0">
+      <input name="q" class="form-control mr-sm-2" type="search" placeholder="Ürün veya kategori arayınız">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
+    </form>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @if(User.Identity.IsAuthenticated)
+            {
+                @User.Identity.Name
+            }
+            else
+            {
+                <p style="display: inline;">Hesabım</p>
+            }
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @if(User.Identity.IsAuthenticated)
+            {
+                if(User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                    <a asp-controller="Admin" asp-action="ProductList" class="nav-link">Ürünler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Admin" asp-action="CategoryList" class="nav-link">Kategoriler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Admin" asp-action="RoleList" class="nav-link">Roller</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Admin" asp-action="UserList" class="nav-link">Kullanıcılar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account/logout" class="nav-link">Çıkış Yap</a>
+                    </li>
+                }
+                else
+                {
+                    <a class="dropdown-item" href="/orders">Siparişlerim</a>
+                    <a class="dropdown-item" href="/account/comment">Değerlendirmelerim</a>
+                    <a class="dropdown-item" href="/account/manage">Hesabım</a>
+                    <a class="dropdown-item" href="/account/logout">Çıkış Yap</a>
+                }
+                
+            }
+            else
+            {
+                <a class="dropdown-item" href="/account/login">Giriş Yap</a>
+                <a class="dropdown-item" href="/account/register">Üye Ol</a>
+            }
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cart">Sepetim</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>
+
+@await Component.InvokeAsync("Categories")
+  
+  
+  
+  
+<!--  
+  
+  
+  
+  <div class="navbar bg-primary navbar-dark navbar-expand-sm">
+        <div class="container">
+            <a href="/" class="navbar-brand">Shopapp</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="/products" class="nav-link">Products</a>
+                </li>
+
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a href="/cart" class="nav-link">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/orders" class="nav-link">Orders</a>
+                    </li>                        
+
+                    if(User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                        <a href="/admin/products" class="nav-link">Admin Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/categories" class="nav-link">Admin Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/role/list" class="nav-link">Admin Roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/role/list" class="nav-link">Admin Users</a>
+                        </li>
+                    }
+                                       
+                }
+            </ul>
+
+             <ul class="navbar-nav ml-auto">
+
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a href="/account/manage" class="nav-link">
+                            @User.Identity.Name
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account/logout" class="nav-link">Logout</a>
+                    </li>
+                }
+                else
+                {                    
+                    <li class="nav-item">
+                        <a href="/account/login" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account/register" class="nav-link">Register</a>
+                    </li>    
+                }
+            </ul>
+
+
+        </div>
+    </div>
+
+    -->

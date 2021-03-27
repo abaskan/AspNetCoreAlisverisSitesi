@@ -1,0 +1,136 @@
+@model OrderModel
+
+<h1 class="text-center">Siparişi Tamamla</h1>
+<hr>
+<div class="row">
+    <div class="col-md-8">
+        <form method="POST" asp-controller="Cart" asp-action="Checkout">
+            <input type="hidden" name="cartId" value="0">
+             <h4 class="mb-3">Ödeme Bilgileri</h4>
+            <hr class="mb-3">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label asp-for="@Model.CardName">Kart Ad - Soyad</label>
+                    <input asp-for="@Model.CardName" class="form-control">
+                </div>
+                    <div class="col-md-6">
+                    <label asp-for="@Model.CardNumber">Kart Numarası</label>
+                    <input asp-for="@Model.CardNumber" class="form-control">
+                </div>              
+            </div>
+             <div class="row mb-3">
+                <div class="col-md-4">
+                   
+                  
+                        <div class="form-group">
+                         <label asp-for="@Model.ExpirationMonth">Son Kullanma Tarihi</label>
+                        <select class="form-control" asp-for="@Model.ExpirationMonth">
+                            <option selected disabled>Ay</option>
+                            <option>01</option>
+                            <option>02</option>
+                            <option>03</option>
+                            <option>04</option>
+                            <option>05</option>
+                            <option>06</option>
+                            <option>07</option>
+                            <option>08</option>
+                            <option>09</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                    </div>
+                </div>
+                    <div class="col-md-4">
+                  
+                        <div class="form-group">
+                            <label asp-for="@Model.ExpirationMonth">Son Kullanma Tarihi</label>
+                            <select asp-for="@Model.ExpirationYear" class="form-control">
+                                <option selected disabled>Yıl</option>
+                                @for (int i = 2021; i < 2100; i++)
+                                {
+                                    <option>@i</option>
+                                }
+                                
+                            </select>
+                        </div>
+                    </div>  
+                  <div class="col-md-4">
+                    <label asp-for="@Model.Cvc">CVC</label>
+                    <input asp-for="@Model.Cvc" class="form-control">
+                </div>             
+            </div>
+
+
+
+            <div class="row p-5">
+                @foreach (var item in (List<Address>)ViewBag.AllAddress)
+                {
+                    <div class="col">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" 
+                            class="custom-control-input" 
+                            name="address"
+                            value="@item.AddressId"
+                            id="address_@(item.AddressId)">
+                            <label class="custom-control-label" for="address_@(item.AddressId)">@item.AddressTitle</label>
+                        </div>
+
+                        <div class="card mt-2 h-100" style="max-width: 18rem;">
+                            <div class="card-header">
+                                @item.AddressTitle
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">@item.FirstName @item.LastName</p>
+                                <p class="card-text">@item.Neighborhood @item.AddressBody</p>
+                                <p class="card-text">@item.City / @item.District</p>
+                                <p class="card-text">@item.Phone</p>
+                            </div>
+                        </div>
+
+                    </div>
+    
+                }
+                    <div>
+                        <a class="btn btn-outline-success" style="margin-top: 2rem;padding: 0.75rem 0.75rem;" href="/account/addressCreate">Yeni Adres Oluştur</a>
+                    </div>
+            </div>
+
+            
+      
+    
+
+            <button type="submit" class="btn btn-success btn-lg btn-block">Siparişi Tamamla</button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <h4 class="mb-3">
+            <span>Sipariş Özeti</span>
+        </h4>
+        <ul class="list-group mb-3">
+
+            @foreach (var item in Model.CartModel.CartItems)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6>@item.Name</h6>
+                        <h6 class="text-muted">@item.Quantity Adet</h6>
+                    </div>
+                    
+                    <div class="ml-auto">
+                        <h6 class="text-muted">@item.Price.ToString("c")</h6>
+                        <h6 class="text-muted">@((item.Price * item.Quantity).ToString("c"))</h6>
+                    </div>
+                </li>
+            }          
+              
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Toplam (TL)</span>
+                <strong>@Model.CartModel.TotalPrice().ToString("c")</strong>
+            </li>
+        </ul>
+       
+    </div>
+</div>
+
+

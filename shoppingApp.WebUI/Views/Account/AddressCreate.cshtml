@@ -1,0 +1,96 @@
+@model AddressModel
+
+<h1 class="h3 text-center">Adres Oluştur</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form asp-controller="Account" asp-action="AddressCreate" method="POST">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" asp-for="UserId">
+        <div class="form-group">
+            <label asp-for="AddressTitle" class="col-form-label">Adres Başlığı</label>
+            <div>
+                <input class="form-control form-control-sm" asp-for="AddressTitle">
+                <span asp-validation-for="AddressTitle" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="col-form-label">Ad</label>
+                    <div>
+                        <input class="form-control form-control-sm" asp-for="FirstName">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="LastName" class="col-form-label">Soyad</label>
+                    <div>
+                        <input class="form-control form-control-sm" asp-for="LastName">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Phone" class="col-form-label">Telefon</label>
+                    <div>
+                        <input class="form-control form-control-sm" asp-for="Phone">
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="City" class="col-form-label">İl</label>
+                    <div>
+                        <input class="form-control form-control-sm" asp-for="City">
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="District" class="col-form-label">İlçe</label>
+                    <div>
+                        <input class="form-control form-control-sm" asp-for="District">
+                        <span asp-validation-for="District" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Neighborhood" class="col-form-label">Mahalle</label>
+                    <div>
+                        <input class="form-control form-control-sm" asp-for="Neighborhood">
+                        <span asp-validation-for="Neighborhood" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AddressBody" class="col-form-label">Adres</label>
+            <div>
+                <textarea class="form-control" asp-for="AddressBody"></textarea>
+                <span asp-validation-for="AddressBody" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <button type="submit" class="btn btn-success btn-block">Kaydet</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

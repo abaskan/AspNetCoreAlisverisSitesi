@@ -1,0 +1,121 @@
+@model UserModel
+
+<div class="row">
+    <div class="col-md-3">
+        @await Html.PartialAsync("_settingList")  
+    </div>
+
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">Bilgilerim</h5>
+                    <form asp-controller="Account" asp-action="DeleteAccount" method="POST">
+                        <input type="hidden" name="userId" value="@Model.UserId">
+                        <button type="submit" class="btn btn-outline-danger">Hesabını Sil</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-controller="Account" asp-action="Manage" method="POST">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">        
+                            <input type="hidden" name="UserId" value="@Model.UserId">
+                            <div class="form-group row">
+                                <label asp-for="FirstName" class="col-sm-3 col-form-label">Ad</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" asp-for="FirstName">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="LastName" class="col-sm-3 col-form-label">Soyad</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" asp-for="LastName">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="UserName" class="col-sm-3 col-form-label">Id</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" asp-for="UserName">
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Email" class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" asp-for="Email" readonly>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label asp-for="Phone" class="col-sm-3 col-form-label">Telefon</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" asp-for="Phone">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                        
+                            <div class="form-group row">
+                                <div class="col-sm-9 offset-sm-3">
+                                    <button type="submit" class="btn btn-outline-success btn-block">Güncelle</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-md-5 offset-md-1">
+                <form asp-controller="Account" asp-action="ChangePassword" method="POST">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">        
+                            <input type="hidden" name="UserId" value="@Model.UserId">
+                            <div class="form-group row">
+                                <label asp-for="Password" class="col-sm-3 col-form-label">Şifre</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" asp-for="Password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="NewPassword" class="col-sm-3 col-form-label">Yeni Şifre</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" asp-for="NewPassword">
+                                    <span asp-validation-for="NewPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                           
+                        
+                            <div class="form-group row">
+                                <div class="col-sm-9 offset-sm-3">
+                                    <button type="submit" class="btn btn-outline-success btn-block">Şifreyi Güncelle</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

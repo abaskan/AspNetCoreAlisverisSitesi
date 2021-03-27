@@ -1,0 +1,15 @@
+@model List<Category>
+
+    <nav class="nav nav-pills flex-column flex-sm-row">
+        <!--<a href="/products" class="list-group-item list-group-item-action">Tüm Kategoriler</a> -->
+
+        @foreach (var category in Model)
+        {
+            <a asp-controller="Shop" 
+            asp-action="List" 
+            asp-route-category="@category.Url" 
+            class="flex-sm-fill text-sm-center nav-link @(ViewBag.SelectedCategory == category.Url?"active":"")">
+                @category.Name
+            </a>
+        }
+    </nav>  

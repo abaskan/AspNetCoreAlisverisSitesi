@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    @RenderSection("Css",false)
+    <link rel="stylesheet" href="~/css/styles.css">
+    <title>E-Alışveriş</title>
+</head>
+<body>
+
+    @await Html.PartialAsync("_navbar")          
+
+    <main class="my-3">
+        <div class="container">     
+
+            @if(TempData["message"]!=null)
+            {
+                <partial name="_ResultMessage" model="@(TempData.Get<AlertMessage>("message"))"/>
+            }      
+             
+            @RenderBody()             
+        </div>
+    </main>
+
+
+    <footer class="py-5 bg-dark text-white text-center">
+        E-Alışveris 2021
+    </footer>
+
+    <script src="~/js/jquery-3.6.0.min.js"></script>
+    @RenderSection("Scripts",false)
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+    
+    @RenderSection("CkEditor",false)
+</body>
+</html>

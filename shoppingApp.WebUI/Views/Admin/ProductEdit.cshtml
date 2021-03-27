@@ -1,0 +1,137 @@
+@model ProductModel
+
+<h1 class="h3 text-center">Ürünü Düzenle</h1>
+<hr>
+
+<form asp-controller="Admin" asp-action="ProductEdit" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+             <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+        
+            <input type="hidden" name="ProductId" value="@Model.ProductId">
+            <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group row">
+                    <label asp-for="Brand" class="col-sm-2 col-form-label">Marka</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="Brand">
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Name" class="col-sm-2 col-form-label">İsim</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Color" class="col-sm-2 col-form-label">Renk</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="Color">
+                        <span asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label asp-for="Url" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="Url" readonly>
+                        <span asp-validation-for="Url" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label  asp-for="Description" class="col-sm-2 col-form-label">Detaylar</label>
+                    <div class="col-sm-10">
+                        <textarea id="editor" class="form-control" asp-for="Description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  asp-for="Price" class="col-sm-2 col-form-label">Fiyat</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="Price" placeholder="    TL">
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label  asp-for="StockQuantity" class="col-sm-2 col-form-label">Stok Miktarı</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="StockQuantity">
+                        <span asp-validation-for="StockQuantity" class="text-danger"></span>
+                    </div>
+                </div> 
+
+            <div class="form-group row">
+                <label asp-for="ImageUrl" class="col-sm-2 col-form-label">Fotoğraf</label>
+                <div class="col-sm-10">
+                    <input type="hidden" asp-for="ImageUrl">
+                    <img src="~/images/@Model.ImageUrl" width="80"/>
+                    <input type="file" name="file">
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-success btn-block">Kaydet</button>
+                </div>
+            </div>
+        
+        </div>
+        <div class="col-md-4">
+          
+            @for (int i = 0; i < Model.SelectedCategories.Count; i++)
+            {
+                <input type="hidden" name="SelectedCategories[@i].CategoryId" value="@Model.SelectedCategories[@i].CategoryId">
+                <input type="hidden" name="SelectedCategories[@i].Name" value="@Model.SelectedCategories[@i].Name">
+            }
+
+            <h4>Kategoriler</h4>
+            <hr>
+
+            @foreach (var item in (List<Category>)ViewBag.Categories)
+            {
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" 
+                    class="custom-control-input" 
+                    name="categoryIds"
+                    value="@item.CategoryId"
+                    id="category_@(item.CategoryId)" 
+                    @(Model.SelectedCategories.Any(i=>i.CategoryId==item.CategoryId)?"checked":"")>
+                    <label class="custom-control-label" for="category_@(item.CategoryId)">@item.Name</label>
+                </div>
+            }
+
+            <hr>
+
+            <div class="custom-control custom-checkbox">
+                <input asp-for="IsApproved" type="checkbox" class="custom-control-input">
+                <label asp-for="IsApproved" class="custom-control-label">Onaylı</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input asp-for="IsAtHome" type="checkbox" class="custom-control-input">
+                <label asp-for="IsAtHome" class="custom-control-label">Ana Sayfa</label>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+@section CkEditor
+{
+    <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+}
